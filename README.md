@@ -1,4 +1,4 @@
-# Plex-DNLA-client-profiles
+# Plex-Chromecast-Ultra / Chromecast  Profile
 chromecast.xml for chromecast ultra to direct stream 4K HEVC and lower
 
 
