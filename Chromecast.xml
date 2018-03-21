@@ -1,64 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Client name="Chromecast">
-  <!-- Author: Plex Inc. -->
+  <!-- Author: xtrap225 -->
   <TranscodeTargets>
-    <VideoProfile protocol="http" container="matroska" codec="h264" audioCodec="aac" context="streaming">
-      <Setting name="VideoEncodeFlags" value="-x264opts bframes=3:cabac=1" />
-    </VideoProfile>
-    <MusicProfile container="matroska" codec="mp3" />
+    <VideoProfile protocol="http" container="mkv" codec="h264" audioCodec="aac,mp3" context="streaming" />
+    <MusicProfile container="mkv" codec="opus" />
     <PhotoProfile container="jpeg" />
+    <SubtitleProfile container="ass" codec="ass" />
   </TranscodeTargets>
-  <TranscodeTargetProfiles>
-    <VideoTranscodeTarget protocol="http" context="streaming">
-      <VideoCodec name="*">
-        <Limitations>
-          <UpperBound name="video.width" value="1920" />
-          <UpperBound name="video.height" value="1080" />
-          <UpperBound name="video.bitrate" value="12000" isRequired="false" />
-          <UpperBound name="video.bitDepth" value="8" isRequired="false" />
-        </Limitations>
-      </VideoCodec>
-    </VideoTranscodeTarget>
-  </TranscodeTargetProfiles>
-  <DirectPlayProfiles>
-    <VideoProfile container="mp4" codec="h264" audioCodec="aac" />
-    <MusicProfile container="mp4" codec="aac" />
-    <MusicProfile container="mp3" codec="mp3" />
-    <PhotoProfile container="jpeg,gif,bmp,png" />
+ <DirectPlayProfiles>
+    <VideoProfile container="mp4" codec="Hevc,h265,mpeg1video,mpeg2video,h264,mpeg4" audioCodec="aac,mp3,mp2"/>
+    <VideoProfile container="mkv" codec="vp9,Hevc,h265,mpeg1video,mpeg2video,h264,mpeg4" audioCodec="aac,mp3,mp2,pcm,flac,alac" subtitleFormat="srt,ass"/>
+    <MusicProfile container="mp3" codec="mp2,mp3"/>
+    <MusicProfile container="mp4" codec="aac"/>
+    <MusicProfile container="flac" codec="flac"/>
+    <MusicProfile container="wav" codec="pcm"/>
+    <PhotoProfile container="jpeg,png,gif"/>
   </DirectPlayProfiles>
-  <ContainerProfiles>
-    <VideoContainer name="mp4">
+<CodecProfiles>
+    <VideoCodec name="h265,Hevc,vp9">
       <Limitations>
-        <Match name="part.optimizedForStreaming" value="1" />
-      </Limitations>
-    </VideoContainer>
-  </ContainerProfiles>
-  <CodecProfiles>
-    <VideoCodec name="*">
-      <Limitations>
-        <UpperBound name="video.width" value="1920" />
-        <UpperBound name="video.height" value="1080" />
-        <UpperBound name="video.bitDepth" value="8" isRequired="false" />
-        <UpperBound name="video.level" value="42" isRequired="false" />
+        <UpperBound name="video.width" value="3840"/>
+        <UpperBound name="video.height" value="2176"/>
+		<UpperBound name="video.bitrate" value="75000"/>
       </Limitations>
     </VideoCodec>
-    <VideoAudioCodec name="mp3">
+    <VideoCodec name="h264,mpeg4">
       <Limitations>
-        <UpperBound name="audio.bitrate" value="320" isRequired="false"/>
+        <UpperBound name="video.width" value="3840"/>
+        <UpperBound name="video.height" value="2176"/>
+        <UpperBound name="video.bitrate" value="75000"/>
+		<UpperBound name="video.bitDepth" value="10" />
+        <UpperBound name="video.level" value="42" />
+      </Limitations>
+    </VideoCodec>
+    <VideoAudioCodec name="aac,mp3">
+      <Limitations>
         <UpperBound name="audio.channels" value="2" />
       </Limitations>
     </VideoAudioCodec>
-    <VideoAudioCodec name="aac">
-      <Limitations>
-        <UpperBound name="audio.bitrate" value="768" isRequired="false"/>
-        <UpperBound name="audio.channels" value="6" />
-      </Limitations>
-    </VideoAudioCodec>
-    <MusicCodec name="mp3">
-      <Limitations>
-        <UpperBound name="audio.bitrate" value="320" isRequired="false"/>
-        <UpperBound name="audio.channels" value="2" />
-      </Limitations>
-    </MusicCodec>
   </CodecProfiles>
 </Client>
